@@ -8,7 +8,6 @@ Build a Kubernetes cluster using Ansible with k3s. The goal is easily install a 
 
 - [X] Debian
 - [X] Ubuntu
-- [X] CentOS
 
 on processor architecture:
 
@@ -22,14 +21,7 @@ Deployment environment must have Ansible 2.4.0+
 Master and nodes must have passwordless SSH access
 
 ## Usage
-
-First create a new directory based on the `sample` directory within the `inventory` directory:
-
-```bash
-cp -R inventory/sample inventory/my-cluster
-```
-
-Second, edit `inventory/my-cluster/hosts.ini` to match the system information gathered above. For example:
+Second, edit `inventory/k3s-cluster/hosts.ini` to match the system information gathered above. For example:
 
 ```bash
 [master]
