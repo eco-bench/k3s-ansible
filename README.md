@@ -35,12 +35,14 @@ master
 node
 ```
 
-If needed, you can also edit `inventory/my-cluster/group_vars/all.yml` to match your environment.
+Edit the ansible_user in `inventory/k3s-cluster/group_vars/all.yml` and set it to your gcp name.
+
+Open port TCP:6443 in the gcp firewall rules.
 
 Start provisioning of the cluster using the following command:
 
 ```bash
-ansible-playbook site.yml -i inventory/my-cluster/hosts.ini
+sudo ansible-playbook site.yml -i inventory/k3s-cluster/hosts.ini --key-file ~/.ssh/google_compute_engine
 ```
 
 ## Kubeconfig
@@ -49,4 +51,10 @@ To get access to your **Kubernetes** cluster just
 
 ```bash
 scp debian@master_ip:~/.kube/config ~/.kube/config
+```
+
+Unable to connect to the server error, use commands with this flag (not secure but works for testing):
+https://stackoverflow.com/questions/46360361/invalid-x509-certificate-for-kubernetes-master
+```bash
+kubectl --insecure-skip-tls-verify
 ```
