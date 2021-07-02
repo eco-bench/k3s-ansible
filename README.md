@@ -24,15 +24,20 @@ Master and nodes must have passwordless SSH access
 Second, edit `inventory/k3s-cluster/hosts.ini` to match the system information gathered above. For example:
 
 ```bash
-[master]
-192.16.35.12
+[all:vars]
+ansible_connection=ssh
+ansible_user=root
+ansible_ssh_private_key_file=~/.ssh/id_rsa
 
-[node]
-192.16.35.[10:11]
+[cloud]
+k3s-master ansible_host=135.181.192.36
 
-[k3s_cluster:children]
-master
-node
+[edge]
+k3s-worker-0 ansible_host=95.217.214.198
+
+[k3s]
+k3s-master ansible_host=135.181.192.36
+k3s-worker-0 ansible_host=95.217.214.198
 ```
 
 Edit the ansible_user in `inventory/k3s-cluster/group_vars/all.yml` and set it to your gcp name.
